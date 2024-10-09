@@ -15,14 +15,11 @@ app.use('/workouts', workoutRoutes);
 app.use('/user-workouts', userWorkoutRoutes);
 app.use('/goals', goalRoutes);
 
-sequelize.sync()
-    .then(() => {
-        console.log('Database synced');
-        app.listen(3000, () => {
-            console.log('Server is running on port 3000');
-        });
-    })
-    .catch(err => {
-        console.error('Failed to sync database: ', err);
+const PORT = process.env.PORT || 3000;
+
+sequelize.sync().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
     });
+}).catch(error => console.error(error));
 //aaaaaa
