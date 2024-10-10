@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 // Routes
 app.use('/users', userRoutes);
 app.use('/workouts', workoutRoutes);
-app.use('/user-workouts', userWorkoutRoutes);
-app.use('/goals', goalRoutes);
+app.use(userWorkoutRoutes);
+app.use(goalRoutes);
 
 const PORT = process.env.PORT || 3000;
 
