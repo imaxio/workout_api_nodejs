@@ -17,8 +17,12 @@ exports.createUserWorkout = async (req, res) => {
 exports.getUserWorkouts = async (req, res) => {
     try {
         //select * from posts where userId = req.params.userId
-        const posts = await UserWorkout.findAll({ where: { user_id: req.params.user_id } });
-        res.json(posts);
+        const userWorkout = await UserWorkout.findAll({ where: { user_id: req.params.user_id } });
+        if (userWorkout.length > 0) {
+            res.status(200).json(userWorkout);
+        } else {
+            res.status(404).json({ message: 'No goals found for this user' });
+        }
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

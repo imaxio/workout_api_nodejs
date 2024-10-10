@@ -32,10 +32,18 @@ const Goal = sequelize.define('Goal', {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     },
+    user_id: {  // Foriegn Key
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: User,
+            key: 'user_id' 
+        }
+    }
 }, {
     timestamps: true,
 });
 
-Goal.belongsTo(User, { foreignKey: 'user_id' });
+Goal.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 
 module.exports = Goal;

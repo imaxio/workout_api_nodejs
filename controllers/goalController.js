@@ -24,12 +24,15 @@ exports.getAllGoals = async (req, res) => {
     }
 };
 
-//get a user goal
+// Get all goals for a specific user
 exports.getUserGoals = async (req, res) => {
     try {
-        //select * from posts where userId = req.params.userId
-        const posts = await Goal.findAll({ where: { user_id: req.params.user_id } });
-        res.json(posts);
+        const goals = await Goal.findAll({ where: { user_id: req.params.user_id } });
+        if (goals.length > 0) {
+            res.status(200).json(goals);
+        } else {
+            res.status(404).json({ message: 'No goals found for this user' });
+        }
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
