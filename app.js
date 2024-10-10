@@ -10,7 +10,10 @@ const app = express();
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api', routes);
+app.use('/api', userRoutes);
+app.use('/api', workoutRoutes);
+app.use('/api', userWorkoutRoutes);
+app.use('/api', goalRoutes);
 
 const PORT = process.env.PORT || 3000;
 
