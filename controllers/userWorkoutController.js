@@ -38,7 +38,7 @@ exports.createUserWorkout = async (req, res) => {
     //     res.status(500).json({ error: error.message });
     // }
 };
-//get a user workout
+//get a user workout history
 exports.getUserWorkouts = async (req, res) => {
     try {
         //select * from posts where userId = req.params.userId
@@ -46,7 +46,21 @@ exports.getUserWorkouts = async (req, res) => {
         if (userWorkout.length > 0) {
             res.status(200).json(userWorkout);
         } else {
-            res.status(404).json({ message: 'No goals found for this user' });
+            res.status(404).json({ message: 'No workout history found for this user' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+//get a workout in user history
+exports.getUserWorkoutsName = async (req, res) => {
+    try {
+        //select * from posts where userId = req.params.userId
+        const userWorkoutName = await UserWorkout.findAll({ where: { user_id: req.params.workout_id } });
+        if (userWorkoutName.length > 0) {
+            res.status(200).json(userWorkoutName);
+        } else {
+            res.status(404).json({ message: 'No user found for this workout' });
         }
     } catch (err) {
         res.status(500).json({ error: err.message });
