@@ -4,7 +4,11 @@ const Workout = require('../models/workout');
 exports.createWorkout = async (req, res) => {
     try {
         const workout = await Workout.create(req.body);
-        res.status(201).json(workout);
+        //res.status(201).json(workout);
+        res.status(201).json({ 
+            message: 'Workout successfully created', 
+            workout: workout 
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -42,7 +46,11 @@ exports.updateWorkout = async (req, res) => {
         });
         if (updated) {
             const updatedWorkout = await Workout.findByPk(req.params.id);
-            res.status(200).json(updatedWorkout);
+            //res.status(200).json(updatedWorkout);
+            res.status(200).json({ 
+                message: 'Workout successfully updated', 
+                workout: updatedWorkout 
+            });
         } else {
             res.status(404).json({ message: 'Workout not found' });
         }
@@ -58,7 +66,8 @@ exports.deleteWorkout = async (req, res) => {
         where: { workout_id: req.params.id }
         });
         if (deleted) {
-            res.status(204).send();
+            //res.status(204).send();
+            res.status(200).json({ message: 'Workout successfully deleted' });
         } else {
             res.status(404).json({ message: 'Workout not found' });
         }

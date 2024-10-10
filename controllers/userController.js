@@ -1,10 +1,15 @@
+const { json } = require('express/lib/response');
 const User = require('../models/user');
 
 // Create a new user
 exports.createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
-            res.status(201).json(user);
+            //res.status(201).json(user);
+            res.status(201).json({ 
+                message: 'User successfully created', 
+                user: user 
+            });
     } catch (error) {
             res.status(500).json({ error: error.message });
     }
@@ -42,7 +47,11 @@ exports.updateUser = async (req, res) => {
     });
     if (updated) {
         const updatedUser = await User.findByPk(req.params.id);
-        res.status(200).json(updatedUser);
+        //res.status(200).json(updatedUser);
+        res.status(200).json({
+            message: 'User succesfully updated',
+            user: updatedUser
+        })
     } else {
         res.status(404).json({ message: 'User not found' });
     }
@@ -58,7 +67,10 @@ exports.deleteUser = async (req, res) => {
             where: { user_id: req.params.id }
     });
     if (deleted) {
-        res.status(204).send();
+        //res.status(204).send();
+        res.status(200).json({
+            message: 'User successfully deleted'
+        })
     } else {
         res.status(404).json({ message: 'User not found' });
     }

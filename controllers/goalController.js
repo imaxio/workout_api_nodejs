@@ -4,7 +4,11 @@ const Goal = require('../models/goal');
 exports.createGoal = async (req, res) => {
     try {
         const goal = await Goal.create(req.body);
-        res.status(201).json(goal);
+        //res.status(201).json(goal);
+        res.status(201).json({ 
+            message: 'Goal successfully created', 
+            goal: goal 
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -17,6 +21,17 @@ exports.getAllGoals = async (req, res) => {
         res.status(200).json(goals);
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+};
+
+//get a user goal
+exports.getUserGoals = async (req, res) => {
+    try {
+        //select * from posts where userId = req.params.userId
+        const posts = await Goal.findAll({ where: { user_id: req.params.user_id } });
+        res.json(posts);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
 
@@ -42,7 +57,11 @@ exports.updateGoal = async (req, res) => {
         });
         if (updated) {
         const updatedGoal = await Goal.findByPk(req.params.id);
-            res.status(200).json(updatedGoal);
+            //res.status(200).json(updatedGoal);
+            res.status(200).json({ 
+                message: 'Goal successfully updated', 
+                goal: updatedGoal 
+            });
         } else {
             res.status(404).json({ message: 'Goal not found' });
         }
@@ -58,7 +77,9 @@ exports.deleteGoal = async (req, res) => {
         where: { goal_id: req.params.id }
         });
         if (deleted) {
-            res.status(204).send();
+            // res.status(204).send();
+            res.status(200).json({ message: 'Goal successfully deleted' });
+
         } else {
             res.status(404).json({ message: 'Goal not found' });
         }
