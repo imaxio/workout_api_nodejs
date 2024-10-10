@@ -17,16 +17,6 @@ exports.createGoal = async (req, res) => {
 
         res.status(500).json({ error: err.message });
     }
-    // try {
-    //     const goal = await Goal.create(req.body);
-    //     //res.status(201).json(goal);
-    //     res.status(201).json({ 
-    //         message: 'Goal successfully created', 
-    //         goal: goal 
-    //     });
-    // } catch (error) {
-    //     res.status(500).json({ error: error.message });
-    // }
 };
 
 // Get all goals

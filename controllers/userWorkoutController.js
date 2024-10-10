@@ -27,21 +27,10 @@ exports.createUserWorkout = async (req, res) => {
 
         res.status(500).json({ error: err.message });
     }
-    // try {
-    //     const userWorkout = await UserWorkout.create(req.body);
-    //     //res.status(201).json(userWorkout);
-    //     res.status(201).json({ 
-    //         message: 'Your workout successfully created', 
-    //         userWorkout: userWorkout 
-    //     });
-    // } catch (error) {
-    //     res.status(500).json({ error: error.message });
-    // }
 };
 //get a user workout history
 exports.getUserWorkouts = async (req, res) => {
     try {
-        //select * from posts where userId = req.params.userId
         const userWorkout = await UserWorkout.findAll({ where: { user_id: req.params.user_id } });
         if (userWorkout.length > 0) {
             res.status(200).json(userWorkout);
@@ -55,7 +44,6 @@ exports.getUserWorkouts = async (req, res) => {
 //get a workout in user history
 exports.getUserWorkoutsName = async (req, res) => {
     try {
-        //select * from posts where userId = req.params.userId
         const userWorkoutName = await UserWorkout.findAll({ where: { workout_id: req.params.workout_id } });
         if (userWorkoutName.length > 0) {
             res.status(200).json(userWorkoutName);
