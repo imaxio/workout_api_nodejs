@@ -32,7 +32,7 @@ const UserWorkout = sequelize.define('UserWorkout', {
   //         model: User,
   //         key: 'user_id' 
   //     }
-  // }
+  // }//
   }, {
     timestamps: false,
 });
