@@ -1,13 +1,21 @@
 const User = require('../models/user');
 const UserWorkout = require('../models/userWorkout');
+const Workout = require('../models/workout');
 
 // Create a new user workout
 exports.createUserWorkout = async (req, res) => {
     try {
+        //user
         const user = await User.findByPk(req.params.user_id);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
+        //workout
+        const workout = await Workout.findByPk(req.params.workout_id);
+        if (!workout) {
+            return res.status(404).json({ error: 'Workout not found' });
+        }
+        //user workout
         const userWorkout = await user.createUserWorkout(req.body);
             res.status(201).json({ 
                 message: 'Your workout successfully created', 
