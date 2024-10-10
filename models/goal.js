@@ -45,5 +45,6 @@ const Goal = sequelize.define('Goal', {
 });
 
 Goal.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+User.hasMany(Goal, {foreignKey: 'user_id'})
 
 module.exports = Goal;

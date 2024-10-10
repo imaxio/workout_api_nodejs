@@ -1,17 +1,32 @@
+const User = require('../models/user');
 const UserWorkout = require('../models/userWorkout');
 
 // Create a new user workout
 exports.createUserWorkout = async (req, res) => {
     try {
-        const userWorkout = await UserWorkout.create(req.body);
-        //res.status(201).json(userWorkout);
-        res.status(201).json({ 
-            message: 'Your workout successfully created', 
-            userWorkout: userWorkout 
-        });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        const user = await User.findByPk(req.params.user_id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const userWorkout = await user.createUserWorkout(req.body);
+            res.status(201).json({ 
+                message: 'Your workout successfully created', 
+                userWorkout: userWorkout 
+            });
+    } catch (err) {
+
+        res.status(500).json({ error: err.message });
     }
+    // try {
+    //     const userWorkout = await UserWorkout.create(req.body);
+    //     //res.status(201).json(userWorkout);
+    //     res.status(201).json({ 
+    //         message: 'Your workout successfully created', 
+    //         userWorkout: userWorkout 
+    //     });
+    // } catch (error) {
+    //     res.status(500).json({ error: error.message });
+    // }
 };
 //get a user workout
 exports.getUserWorkouts = async (req, res) => {
