@@ -39,9 +39,9 @@ const UserWorkout = sequelize.define('UserWorkout', {
 });
 
 UserWorkout.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-User.hasMany(UserWorkout, {foreignKey: 'user_id'})
+User.hasMany(UserWorkout, {foreignKey: 'user_id'});
 
-UserWorkout.belongsTo(Workout, { foreignKey: 'workout_id' });
-Workout.hasMany(UserWorkout, {foreignKey: 'workout_id'});
+UserWorkout.belongsTo(Workout, { foreignKey: 'workout_id', onDelete: 'CASCADE' });
+Workout.hasMany(UserWorkout, { foreignKey: 'workout_id'});
 
 module.exports = UserWorkout;
