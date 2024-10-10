@@ -17,9 +17,11 @@ exports.createUserWorkout = async (req, res) => {
         }
         //user workout
         const userWorkout = await user.createUserWorkout(req.body);
+        const userWorkoutType = await workout.createUserWorkout(req.body);
             res.status(201).json({ 
                 message: 'Your workout successfully created', 
-                userWorkout: userWorkout 
+                userWorkout: userWorkout,
+                userWorkoutType: userWorkoutType
             });
     } catch (err) {
 
