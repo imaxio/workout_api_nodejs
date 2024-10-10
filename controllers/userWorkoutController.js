@@ -56,7 +56,7 @@ exports.getUserWorkouts = async (req, res) => {
 exports.getUserWorkoutsName = async (req, res) => {
     try {
         //select * from posts where userId = req.params.userId
-        const userWorkoutName = await UserWorkout.findAll({ where: { user_id: req.params.workout_id } });
+        const userWorkoutName = await UserWorkout.findAll({ where: { workout_id: req.params.workout_id } });
         if (userWorkoutName.length > 0) {
             res.status(200).json(userWorkoutName);
         } else {
