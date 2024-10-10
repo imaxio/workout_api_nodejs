@@ -25,14 +25,14 @@ const UserWorkout = sequelize.define('UserWorkout', {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    user_id: {  // Foriegn Key
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-          model: User,
-          key: 'user_id' 
-      }
-  }
+  //   user_id: {  // Foriegn Key
+  //     type: DataTypes.INTEGER,
+  //     allowNull: false,
+  //     references: {
+  //         model: User,
+  //         key: 'user_id' 
+  //     }
+  // }
   }, {
     timestamps: false,
 });
